@@ -8,4 +8,4 @@
   
 - Note: Needs Microsoft.Search.Interop.dll next to the script.
 - Download Microsoft.Search.Interop.dll : https://anonfile.com/FfA0Nfndn6/Microsoft.Search.Interop_dll
-- Download Set_Indexing_Options.exe : 
+- Download https://github.com/Thdub/Set_Indexing_Options/releases/tag/v1.0
