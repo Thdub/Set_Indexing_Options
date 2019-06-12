@@ -6,6 +6,6 @@
   - Set_Indexing_Options is an interactive script (with a fancy browser) which allows to set your desired location(s) for search
   indexing.
   
-- Note: Needs Microsoft.Search.Interop.dll next to the script. Open the file with Powershell ISE.
+- Note: Needs Microsoft.Search.Interop.dll next to the script.
 - Download Microsoft.Search.Interop.dll : https://anonfile.com/FfA0Nfndn6/Microsoft.Search.Interop_dll
 - Download Set_Indexing_Options.exe : 
