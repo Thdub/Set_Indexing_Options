@@ -10,8 +10,8 @@ Group policy allows to include or exclude locations to indexed paths, but it won
   - Set_Indexing_Options.bat is an interactive script (with a fancy browser) which allows to set your desired location(s) for search indexing.
 
 
-Note: Needs Microsoft.Search.Interop.dll next to the script.
+Note : Needs Microsoft.Search.Interop.dll next to the script.
 
 Download Microsoft.Search.Interop.dll : https://anonfile.com/FfA0Nfndn6/Microsoft.Search.Interop_dll
 
-Download executable https://github.com/Thdub/Set_Indexing_Options/releases/download/v1.0/Set_Indexing_Options.exe
+Download executable : https://github.com/Thdub/Set_Indexing_Options/releases/download/v1.0/Set_Indexing_Options.exe
