@@ -1,5 +1,5 @@
 # Set Indexing Options
-- Script to set indexed locations under "Indexing Options"
+- Script to set indexed locations under "Indexing Options" (setting in control panel)
 - Group policy allows to include or exclude locations to indexed paths, but it won't override defaults or already set indexing options. 
 - 3 different scripts:
   - "Set_Indexing_To_ StartMenus_Only" and "Set_Indexing_To_ WinStartMenu_Only" are more for post-install/deployment. 1st one will add both Start Menu locations, 2nd one only "%ProgramData%\Microsoft\Windows\Start Menu". 
