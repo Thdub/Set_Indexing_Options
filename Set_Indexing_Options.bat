@@ -1,19 +1,18 @@
 @if (@CodeSection == @Batch) @then
 
 @echo off
+setlocal disableDelayedExpansion
+
+	call :conSize 100 30 100 9999
 
 :: Title
-	echo [97m]0;Indexing Options v2.0[97m
+	echo [97m]0;Indexing Options v2.0[97m[?25l
 	cls
-	echo =============================
-	echo Indexing Options Script v2.0
-	echo =============================
+	echo                               =============================
+	echo                               Indexing Options Script v2.1
+	echo                               =============================
 :: Written by Th. Dub @ResonantStep - 2019
-	echo:
 
-:: Variables	
-	setlocal
-	cd /d "%~dp0"
 	set "Clean=OFF"
 	set "Idx_Tmp_Folder=%TEMP%\Indexing_Options_%random%.tmp"
 	set "Idx_lock=%Idx_Tmp_Folder%\wait%random%.lock"
@@ -23,17 +22,18 @@
 	set "Index=0"
 	set "IndexedFolder="
 	set "Increment_Index="
-	set "line_up=2"
+	set "line_up=2" & set "line_up2=2"
 	set "Idx_1=-1" & set "Idx_2=-2" & set "Idx_3=-3" & set "Idx_4=-4" & set "Idx_5=-5" & set "Idx_6=-6" & set "Idx_7=-7" & set "Idx_8=-8" & set "Idx_9=-9" & set "Idx_10=-10"
 	set "Idx_11=-11" & set "Idx_12=-12" & set "Idx_13=-13" & set "Idx_14=-14" & set "Idx_15=-15" & set "Idx_16=-16" & set "Idx_17=-17" & set "Idx_18=-18" & set "Idx_19=-19" & set "Idx_20=-20"
 	set "IndexedFolder_1=" & set "IndexedFolder_2=" & set "IndexedFolder_3=" & set "IndexedFolder_4=" & set "IndexedFolder_5=" & set "IndexedFolder_6=" & set "IndexedFolder_7=" & set "IndexedFolder_8=" & set "IndexedFolder_9=" & set "IndexedFolder_10="
 	set "IndexedFolder_11=" & set "IndexedFolder_12=" & set "IndexedFolder_13=" & set "IndexedFolder_14=" & set "IndexedFolder_15=" & set "IndexedFolder_16=" & set "IndexedFolder_17=" & set "IndexedFolder_18=" & set "IndexedFolder_19=" & set "IndexedFolder_20="
 
 :: Menu
-	echo [?25l1. Set custom locations& echo:
+	echo:
+	echo 1. Set custom locations& echo:
 	echo 2. Add Windows start menus only& echo:
 	echo 3. Remove all locations from indexing options& echo:
-	echo 4. Default indexing options settings& echo:
+	echo 4. Default indexing options settings& echo: & echo:
 	<nul set /p DummyName=Select your option, or 0 to exit: [?25h
 	
 	choice /c 12340 /n /m "" >nul 2>&1
@@ -42,28 +42,28 @@
 
 	if errorlevel 4 (
 		echo [?25l4
-		echo [14D[3A[92m4. Default indexing options settings[97m[3B
+		echo [14D[4A[92m4. Default indexing options settings[97m[4B
 		set "Style=default"
 		goto :Indexing_Options_Task
 	)
 
 	if errorlevel 3 (
 		echo [?25l3
-		echo [14D[5A[92m3. Remove all locations from indexing options[97m[5B
+		echo [14D[6A[92m3. Remove all locations from indexing options[97m[6B
 		set "Style=reset"
 		goto :Indexing_Options_Task
 	)
 
 	if errorlevel 2 (
 		echo [?25l2
-		echo [14D[7A[92m2. Add Windows start menus only[97m[7B
+		echo [14D[8A[92m2. Add Windows start menus only[97m[8B
 		set "Style=startmenus"
 		goto :Indexing_Options_Task
 	)
 
 	if errorlevel 1 (
 		echo [?25l1
-		echo [9A[92m1. Set custom locations[97m[9B
+		echo [10A[92m1. Set custom locations[97m[10B
 		set "Style=custom"
 		goto :PathSelection
 	)
@@ -74,7 +74,7 @@
 	if %Index%==0 ( set "IndexedFolder=%%a" ) else ( set "IndexedFolder_%Index%=%%a" ))
 
 	if "%IndexedFolder%" == "" (
-		echo [2ASelect your option, or 0 to exit: [2X[9A
+		<nul set /p DummyName=[%line_up2%ASelect your option, or 0 to exit: [2X[10A
 		endlocal && goto :Indexing_Options
 	)
 
@@ -85,11 +85,20 @@
 	)
 
 	if "!IndexedFolder_%Index%!" == "" (
-		set "IndexedFolder="
 		echo [%line_up%A[140X
-		echo [140X&echo [140X&echo [140X&echo [140X&echo [140X&echo [140X&echo [140X&echo [140X
-		echo [140X&echo [140X&echo [140X&echo [140X&echo [140X&echo [140X&echo [140X&echo [140X
-		echo [19ASelect your option, or 0 to exit: [2X[9A
+		set "IndexedFolder="
+		set "Filler=%line_up%"
+		set /a "Filler-=1"
+
+:Filler_Loop
+		if "%Filler%" == "0" ( goto :Filler_Loop_End )
+		echo [140X
+		set /a "Filler-=1"
+		goto :Filler_Loop
+
+:Filler_Loop_End
+		set /a "line_up2=%line_up2%+%line_up%"
+		<nul set /p DummyName=[%line_up2%ASelect your option, or 0 to exit: [2X[10A
 		endlocal && goto :Indexing_Options
 	)
 
@@ -118,14 +127,14 @@
 :SelectMorePaths
 	<nul set /p DummyName=Do you want to add another path to indexed locations? [Y/N][?25h
 	choice /C:YN /M "" >nul 2>&1
-	if errorlevel 2 ( echo No& goto :PathResult )
+	if errorlevel 2 ( echo [31mNo[97m& goto :PathResult )
 	if "%Increment_Index%" == "incr" (
 		set /a "Index+=1"
 		set /a "Idx_1+=1" & set /a "Idx_2+=1" & set /a "Idx_3+=1" & set /a "Idx_4+=1" & set /a "Idx_5+=1" & set /a "Idx_6+=1" & set /a "Idx_7+=1"
 		set /a "Idx_8+=1" & set /a "Idx_9+=1" & set /a "Idx_10+=1" & set /a "Idx_11+=1" & set /a "Idx_12+=1" & set /a "Idx_13+=1" & set /a "Idx_14+=1"
 		set /a "Idx_15+=1" & set /a "Idx_16+=1" & set /a "Idx_17+=1" & set /a "Idx_18+=1" & set /a "Idx_19+=1" & set /a "Idx_20+=1"
 	)
-	echo [?25lYes
+	echo [92mYes[97m[?25l
 	goto :PathSelection
 
 :PathResult
@@ -256,8 +265,16 @@
 	
 :End_Pause
 	timeout /t 3 /nobreak >NUL 2>&1
-
 exit /b
+
+::============================================================================================================
+:conSize  winWidth  winHeight  bufWidth  bufHeight
+::============================================================================================================
+	mode con: cols=%1 lines=%2
+	Powershell "&{$H=get-host;$W=$H.ui.rawui;$B=$W.buffersize;$B.width=%3;$B.height=%4;$W.buffersize=$B;}"
+	goto :eof
+::============================================================================================================
+
 @end
 
 
